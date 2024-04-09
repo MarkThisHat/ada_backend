@@ -13,7 +13,7 @@ public class ServicoDeTransacoes {
             return false;
         }
 
-        origem.debito(valorFinal);
+        origem.saque(valorFinal);
         destino.deposito(valor);
         return true;
     }

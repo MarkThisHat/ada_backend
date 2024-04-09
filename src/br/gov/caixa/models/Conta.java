@@ -53,4 +53,8 @@ public abstract class Conta {
 
     public void setEstrategiaDeCalculoDeTarifas(EstrategiaDeCalculoDeTarifas estrategia) {
     }
+
+    public EstrategiaDeCalculoDeTarifas getEstrategiaDeCalculoDeTaxas() {
+        return null;
+    }
 }
