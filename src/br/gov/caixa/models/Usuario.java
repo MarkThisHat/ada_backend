@@ -25,38 +25,53 @@ public class Usuario {
         this.nome = nome;
         this.dataDeCadastro = dataDeCadastro;
         this.status = Status.ATIVO;
-        this.contas = new ArrayList<Conta>();
-//        this.adicionaConta(novaContaCorrente());
+        this.contas = new ArrayList<>();
     }
 
     public void adicionaConta(Conta conta) {
         this.contas.add(conta);
     }
 
-    public void abreContaCorrente() {
-        ContaCorrente novaConta = new ContaCorrente(makeId(), LocalDate.now(), this);
+    public void abreContaCorrente(FabricaDeContas fabrica) {
+        ContaCorrente novaConta = fabrica.criarContaCorrente(this);
         adicionaConta(novaConta);
     }
 
-    public void abreContaPoupanca() {
-        ContaPoupanca novaConta = new ContaPoupanca(makeId(), LocalDate.now(), this);
+    public void abreContaPoupanca(FabricaDeContas fabrica) {
+        ContaPoupanca novaConta = fabrica.criarContaPoupanca(this);
         adicionaConta(novaConta);
     }
 
-    public void abreContaInvestimento() {
-        ContaInvestimento novaConta = new ContaInvestimento(makeId(), LocalDate.now(), this);
+    public void abreContaInvestimento(FabricaDeContas fabrica) {
+        ContaInvestimento novaConta = fabrica.criarContaInvestimento(this);
         adicionaConta(novaConta);
     }
 
     public String makeId() {
-        return this.id + this.contas.size();
+        return this.id + "-" + (this.contas.size() + 1);
     }
 
-    public String getTipo() {
-        return classificacao.tipoDeCliente();
+    public Classificacao getClassificacao() {
+        return this.classificacao;
     }
 
     public String getId() {
         return this.id;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public LocalDate getDataDeCadastro() {
+        return this.dataDeCadastro;
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public List<Conta> getContas() {
+        return new ArrayList<>(this.contas);
     }
 }

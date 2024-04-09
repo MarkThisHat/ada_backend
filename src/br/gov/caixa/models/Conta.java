@@ -1,73 +1,56 @@
 package br.gov.caixa.models;
 
 import br.gov.caixa.enums.Status;
-import br.gov.caixa.enums.TipoAcao;
+import br.gov.caixa.servicos.tarifas.EstrategiaDeCalculoDeTarifas;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public abstract class Conta {
-    protected String id;
-    protected double saldo;
-    protected Set<TipoAcao> acoesPermitidas;
-    protected List<Acao> historicoAcoes;
-    protected LocalDate dataAtualizacao;
-    protected Status status;
-    protected Usuario titular;
+    private String id;
+    private BigDecimal saldo;
+    private LocalDate dataAtualizacao;
+    private Status status;
+    private Usuario titular;
 
-    public Conta (String id, LocalDate data, Usuario titular) {
+    public Conta(String id, LocalDate dataAtualizacao, Usuario titular) {
         this.id = id;
-        this.saldo = 0;
-        this.historicoAcoes = new ArrayList<>();
-        this.dataAtualizacao = data;
+        this.saldo = BigDecimal.ZERO;
+        this.dataAtualizacao = dataAtualizacao;
         this.status = Status.ATIVO;
         this.titular = titular;
     }
 
-    abstract Conta abreConta(String id, LocalDate data, Usuario usuario);
-
-    public void adicionaAcao(Acao acao) {
-        this.historicoAcoes.add(acao);
+    public void deposito(BigDecimal valor) {
+        this.saldo = this.saldo.add(valor);
+        this.dataAtualizacao = LocalDate.now();
     }
 
-    public boolean saque(double valor) {
-        valor *= acrescimoPj(titular.getTipo());
+    public abstract boolean saque(BigDecimal valor);
 
-        if (saldo < valor) {
-            return false;
-        }
-        saldo -= valor;
-        return true;
+    public String getId() {
+        return id;
     }
 
-    public boolean transferencia(double valor, Conta contaDestino, String destinatario) {
-        double valorADebitar = valor;
-
-        valorADebitar *= acrescimoPj(titular.getTipo());
-
-        if (saldo < valorADebitar || !contaDestino.getTitular().equals(destinatario)) {
-            return false;
-        }
-        saldo -= valorADebitar;
-        contaDestino.recebeTransferencia(valor);
-        return true;
+    public BigDecimal getSaldo() {
+        return saldo;
     }
 
-    public boolean recebeTransferencia(double valor) {
-        saldo += valor;
-        return true;
+    public LocalDate getDataAtualizacao() {
+        return dataAtualizacao;
     }
 
-    public double acrescimoPj(String titular) {
-        if (titular.equals("PJ")) {
-            return 1.05;
-        }
-        return 1;
+    public Status getStatus() {
+        return status;
     }
 
     public Usuario getTitular() {
-        return this.titular;
+        return titular;
+    }
+
+    public void setEstrategiaDeCalculoDeTarifas(EstrategiaDeCalculoDeTarifas estrategia) {
     }
 }
