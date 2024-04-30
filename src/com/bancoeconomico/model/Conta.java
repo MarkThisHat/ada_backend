@@ -1,5 +1,7 @@
 package com.bancoeconomico.model;
 
+import com.bancoeconomico.service.csv.AccountRegistryControl;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Random;
@@ -13,7 +15,7 @@ public abstract class Conta {
 
     public Conta(Cliente cliente) {
         this.cliente = cliente;
-        this.numero = new Random().nextInt();
+        this.numero = AccountRegistryControl.generateUniqueNumber();
         this.dataCriacao = LocalDate.now();
         this.saldo = BigDecimal.ZERO;
     }

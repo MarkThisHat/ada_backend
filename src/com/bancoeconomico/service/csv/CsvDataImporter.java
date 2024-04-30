@@ -1,4 +1,4 @@
-package com.bancoeconomico.service;
+package com.bancoeconomico.service.csv;
 
 import com.bancoeconomico.model.Cliente;
 import com.bancoeconomico.model.ClientePF;
@@ -24,7 +24,7 @@ public class CsvDataImporter {
                     .map(line -> line.split(","))
                     .filter(data -> isValidClient(data, headerMap))
                     .map(data -> createClient(data, headerMap))
-                    .flatMap(Optional::stream)  // Converts Optional<Cliente> to Stream<Cliente>
+                    .flatMap(Optional::stream)
                     .collect(Collectors.toList()));
         } catch (IOException e) {
             System.out.println("Error reading CSV file: " + e.getMessage());
@@ -45,26 +45,20 @@ public class CsvDataImporter {
         String documento = data[headerMap.get("documento")];
         TipoClienteEnum tipo = TipoClienteEnum.fromInt(Integer.parseInt(data[headerMap.get("tipo")]));
 
-        switch (tipo) {
-            case PESSOA_JURIDICA:
-                return Optional.of(new ClientePJ(nome, documento));
-            case PESSOA_FISICA:
-                return Optional.of(new ClientePF(nome, documento));
-            default:
-                return Optional.empty();
-        }
+        return switch (tipo) {
+            case PESSOA_JURIDICA -> Optional.of(new ClientePJ(nome, documento));
+            case PESSOA_FISICA -> Optional.of(new ClientePF(nome, documento));
+            default -> Optional.empty();
+        };
     }
 
     private boolean isValidClient(String[] data, Map<String, Integer> headerMap) {
         TipoClienteEnum tipo = TipoClienteEnum.fromInt(Integer.parseInt(data[headerMap.get("tipo")]));
-        switch (tipo) {
-            case PESSOA_JURIDICA:
-                return true;
-            case PESSOA_FISICA:
-                return checkAge(data[headerMap.get("nascimento_criacao")]);
-            default:
-                return false;
-        }
+        return switch (tipo) {
+            case PESSOA_JURIDICA -> true;
+            case PESSOA_FISICA -> checkAge(data[headerMap.get("nascimento_criacao")]);
+            default -> false;
+        };
     }
 
     private boolean checkAge(String birthdate) {

@@ -6,6 +6,7 @@ public class ClientePJ extends Cliente {
 
     public ClientePJ(String nome, String cnpj) {
         super(nome);
+        this.cnpj = cnpj;
     }
 
     public String getCnpj() {

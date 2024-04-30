@@ -4,30 +4,29 @@ import com.bancoeconomico.model.Cliente;
 import com.bancoeconomico.model.ClientePF;
 import com.bancoeconomico.model.ClientePJ;
 import com.bancoeconomico.model.Conta;
+import com.bancoeconomico.service.csv.AccountInitializationService;
+import com.bancoeconomico.service.csv.CsvDataImporter;
+import com.bancoeconomico.service.csv.CsvExporter;
 import com.bancoeconomico.service.factory.OperacoesBancariasFactory;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Cliente clientePF = new ClientePF("Cliente PF", "232323232");
-        deposito(clientePF, BigDecimal.valueOf(100));
-        saque(clientePF, BigDecimal.valueOf(90));
-        deposito(clientePF, BigDecimal.valueOf(100));
-        investimento(clientePF, BigDecimal.valueOf(100));
+        CsvDataImporter importer = new CsvDataImporter();
+        Optional<List<Cliente>> optionalClients = importer.importClients("pessoas.csv");
 
-        Cliente clientePJ = new ClientePJ("Cliente PJ", "232323232");
-        deposito(clientePJ, BigDecimal.valueOf(100));
-        saque(clientePJ, BigDecimal.valueOf(90));
-        deposito(clientePJ, BigDecimal.valueOf(100));
-        investimento(clientePJ, BigDecimal.valueOf(100));
+        optionalClients.ifPresent(clients -> {
+            AccountInitializationService accountService = new AccountInitializationService();
+            accountService.initializeAccounts(clients);
 
-        transferir(clientePF, clientePJ, BigDecimal.valueOf(50));
-
-        imprimirTodosSaldos(clientePF);
-        imprimirTodosSaldos(clientePJ);
+        CsvExporter exporter = new CsvExporter();
+        exporter.exportClients(clients, "acao_marketing.csv");
+        });
 
     }
 
@@ -78,3 +77,4 @@ public class Main {
     }
 
 }
+
