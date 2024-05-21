@@ -10,3 +10,8 @@ Modulo III
 - Importar clientes de CSV
 - Criar conta e creditar R$ 50
 - Exportar CSV com informações das contas novas
+
+Modulo IV
+
+- Criar API restful para utilização do programa
+
