@@ -1,5 +1,12 @@
 package main.java.com.bancoeconomico;
 
+import main.java.com.bancoeconomico.service.csv.CsvDataImporter;
+import main.java.com.bancoeconomico.service.csv.AccountInitializationService;
+import main.java.com.bancoeconomico.service.csv.CsvExporter;
+import main.java.com.bancoeconomico.model.Cliente;
+import main.java.com.bancoeconomico.model.Conta;
+import main.java.com.bancoeconomico.service.factory.OperacoesBancariasFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

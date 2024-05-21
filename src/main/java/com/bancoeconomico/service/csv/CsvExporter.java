@@ -1,14 +1,17 @@
-package com.bancoeconomico.service.csv;
+package main.java.com.bancoeconomico.service.csv;
 
-import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ClientePF;
-import com.bancoeconomico.model.Conta;
+import main.java.com.bancoeconomico.model.Cliente;
+import main.java.com.bancoeconomico.model.ClientePF;
+import main.java.com.bancoeconomico.model.Conta;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CsvExporter {
 
     public void exportClients(List<Cliente> clients, String filePath) {

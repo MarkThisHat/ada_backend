@@ -1,9 +1,9 @@
-package com.bancoeconomico.service.impl;
+package main.java.com.bancoeconomico.service.impl;
 
-import com.bancoeconomico.model.ClientePJ;
-import com.bancoeconomico.model.Conta;
-import com.bancoeconomico.model.ContaInvestimento;
-import com.bancoeconomico.service.OperacoesBancarias;
+import main.java.com.bancoeconomico.model.ClientePJ;
+import main.java.com.bancoeconomico.model.Conta;
+import main.java.com.bancoeconomico.model.ContaInvestimento;
+import main.java.com.bancoeconomico.service.OperacoesBancarias;
 
 import java.math.BigDecimal;
 

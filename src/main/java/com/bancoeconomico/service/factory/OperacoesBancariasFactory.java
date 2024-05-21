@@ -1,12 +1,12 @@
-package com.bancoeconomico.service.factory;
+package main.java.com.bancoeconomico.service.factory;
 
-import com.bancoeconomico.exceptions.TipoClienteInvalidoException;
-import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ClientePF;
-import com.bancoeconomico.model.ClientePJ;
-import com.bancoeconomico.service.OperacoesBancarias;
-import com.bancoeconomico.service.impl.OperacoesContaClientePF;
-import com.bancoeconomico.service.impl.OperacoesContaClientePJ;
+import main.java.com.bancoeconomico.exceptions.TipoClienteInvalidoException;
+import main.java.com.bancoeconomico.model.Cliente;
+import main.java.com.bancoeconomico.model.ClientePF;
+import main.java.com.bancoeconomico.model.ClientePJ;
+import main.java.com.bancoeconomico.service.OperacoesBancarias;
+import main.java.com.bancoeconomico.service.impl.OperacoesContaClientePF;
+import main.java.com.bancoeconomico.service.impl.OperacoesContaClientePJ;
 
 public final class OperacoesBancariasFactory {
 

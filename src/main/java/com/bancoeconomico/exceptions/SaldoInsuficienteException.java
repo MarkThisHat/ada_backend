@@ -1,4 +1,4 @@
-package com.bancoeconomico.exceptions;
+package main.java.com.bancoeconomico.exceptions;
 
 public class SaldoInsuficienteException extends RuntimeException {
 

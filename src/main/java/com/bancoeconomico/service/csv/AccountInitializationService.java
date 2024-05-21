@@ -1,11 +1,14 @@
-package com.bancoeconomico.service.csv;
+package main.java.com.bancoeconomico.service.csv;
 
-import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ContaCorrente;
+import main.java.com.bancoeconomico.model.Cliente;
+import main.java.com.bancoeconomico.model.ContaCorrente;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class AccountInitializationService {
 
     public void initializeAccounts(List<Cliente> clients) {

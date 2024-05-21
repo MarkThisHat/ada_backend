@@ -1,4 +1,4 @@
-package com.bancoeconomico.model;
+package main.java.com.bancoeconomico.model;
 
 public class ContaInvestimento extends Conta {
 

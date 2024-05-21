@@ -1,4 +1,4 @@
-package com.bancoeconomico.service.csv;
+package main.java.com.bancoeconomico.service.csv;
 
 import java.util.Collections;
 import java.util.HashSet;

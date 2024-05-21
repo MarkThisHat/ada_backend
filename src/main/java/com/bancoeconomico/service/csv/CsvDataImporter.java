@@ -1,9 +1,9 @@
-package com.bancoeconomico.service.csv;
+package main.java.com.bancoeconomico.service.csv;
 
-import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ClientePF;
-import com.bancoeconomico.model.ClientePJ;
-import com.bancoeconomico.model.enums.TipoClienteEnum;
+import main.java.com.bancoeconomico.model.Cliente;
+import main.java.com.bancoeconomico.model.ClientePF;
+import main.java.com.bancoeconomico.model.ClientePJ;
+import main.java.com.bancoeconomico.model.enums.TipoClienteEnum;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,6 +15,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CsvDataImporter {
 
     public Optional<List<Cliente>> importClients(String filePath) {
