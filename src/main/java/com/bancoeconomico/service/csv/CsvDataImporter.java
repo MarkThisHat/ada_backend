@@ -1,9 +1,9 @@
-package main.java.com.bancoeconomico.service.csv;
+package com.bancoeconomico.service.csv;
 
-import main.java.com.bancoeconomico.model.Cliente;
-import main.java.com.bancoeconomico.model.ClientePF;
-import main.java.com.bancoeconomico.model.ClientePJ;
-import main.java.com.bancoeconomico.model.enums.TipoClienteEnum;
+import com.bancoeconomico.model.Cliente;
+import com.bancoeconomico.model.ClientePF;
+import com.bancoeconomico.model.ClientePJ;
+import com.bancoeconomico.model.enums.TipoClienteEnum;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

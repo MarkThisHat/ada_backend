@@ -1,4 +1,4 @@
-package main.java.com.bancoeconomico.model.enums;
+package com.bancoeconomico.model.enums;
 
 public enum TipoClienteEnum {
 

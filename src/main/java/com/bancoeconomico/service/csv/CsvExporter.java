@@ -1,8 +1,8 @@
-package main.java.com.bancoeconomico.service.csv;
+package com.bancoeconomico.service.csv;
 
-import main.java.com.bancoeconomico.model.Cliente;
-import main.java.com.bancoeconomico.model.ClientePF;
-import main.java.com.bancoeconomico.model.Conta;
+import com.bancoeconomico.model.Cliente;
+import com.bancoeconomico.model.ClientePF;
+import com.bancoeconomico.model.Conta;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

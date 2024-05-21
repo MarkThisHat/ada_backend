@@ -1,6 +1,6 @@
-package main.java.com.bancoeconomico.model;
+package com.bancoeconomico.model;
 
-import main.java.com.bancoeconomico.model.enums.StatusClienteEnum;
+import com.bancoeconomico.model.enums.StatusClienteEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

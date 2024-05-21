@@ -1,10 +1,10 @@
-package main.java.com.bancoeconomico.service;
+package com.bancoeconomico.service;
 
-import main.java.com.bancoeconomico.exceptions.ContaNaoEncontradaException;
-import main.java.com.bancoeconomico.model.Cliente;
-import main.java.com.bancoeconomico.model.Conta;
-import main.java.com.bancoeconomico.model.ContaInvestimento;
-import main.java.com.bancoeconomico.service.factory.OperacoesBancariasFactory;
+import com.bancoeconomico.exceptions.ContaNaoEncontradaException;
+import com.bancoeconomico.model.Cliente;
+import com.bancoeconomico.model.Conta;
+import com.bancoeconomico.model.ContaInvestimento;
+import com.bancoeconomico.service.factory.OperacoesBancariasFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

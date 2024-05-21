@@ -1,7 +1,7 @@
-package main.java.com.bancoeconomico.service;
+package com.bancoeconomico.service;
 
-import main.java.com.bancoeconomico.model.Cliente;
-import main.java.com.bancoeconomico.model.Conta;
+import com.bancoeconomico.model.Cliente;
+import com.bancoeconomico.model.Conta;
 
 import java.math.BigDecimal;
 

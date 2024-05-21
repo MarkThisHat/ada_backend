@@ -1,4 +1,4 @@
-package test.java.com.bancoeconomico;
+package com.bancoeconomico;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

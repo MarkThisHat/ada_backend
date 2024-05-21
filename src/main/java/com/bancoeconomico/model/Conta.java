@@ -1,6 +1,6 @@
-package main.java.com.bancoeconomico.model;
+package com.bancoeconomico.model;
 
-import main.java.com.bancoeconomico.service.csv.AccountRegistryControl;
+import com.bancoeconomico.service.csv.AccountRegistryControl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

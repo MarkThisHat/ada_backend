@@ -1,4 +1,4 @@
-package main.java.com.bancoeconomico.model;
+package com.bancoeconomico.model;
 
 public class ClientePF extends Cliente {
 
