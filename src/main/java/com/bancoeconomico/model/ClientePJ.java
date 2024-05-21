@@ -1,8 +1,17 @@
 package com.bancoeconomico.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class ClientePJ extends Cliente {
 
     private String cnpj;
+
+    public ClientePJ () {
+        /*
+            JPA empty constructor
+         */
+    }
 
     public ClientePJ(String nome, String cnpj) {
         super(nome);

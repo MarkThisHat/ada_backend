@@ -1,17 +1,31 @@
 package com.bancoeconomico.model;
 
 import com.bancoeconomico.service.csv.AccountRegistryControl;
-
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Random;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Conta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Integer numero;
     private BigDecimal saldo;
     private LocalDate dataCriacao;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    public Conta() {
+        /*
+            JPA empty constructor
+         */
+    }
 
     public Conta(Cliente cliente) {
         this.cliente = cliente;
@@ -39,4 +53,6 @@ public abstract class Conta {
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
+
+    //protected abstract String generateAccountNumber();
 }

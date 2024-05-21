@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -34,20 +35,18 @@ public class AdaBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Optional<List<Cliente>> optionalClients = importer.importClients("pessoas.csv");
+		File file = new File("pessoas.csv");
 
-		optionalClients.ifPresent(clients -> {
-			accountService.initializeAccounts(clients);
-			exporter.exportClients(clients, "acao_marketing.csv");
+		if (file.exists() && !file.isDirectory()) {
+			Optional<List<Cliente>> optionalClients = importer.importClients("pessoas.csv");
 
-			// Example usage of other methods (comment out if not needed)
-			if (!clients.isEmpty()) {
-				Cliente cliente = clients.get(0);
-				deposito(cliente, new BigDecimal("100.00"));
-				saque(cliente, new BigDecimal("50.00"));
-				imprimirTodosSaldos(cliente);
-			}
-		});
+			optionalClients.ifPresent(clients -> {
+				accountService.initializeAccounts(clients);
+				exporter.exportClients(clients, "acao_marketing.csv");
+			});
+		} else {
+			System.out.println("pessoas.csv not found. Skipping account initialization.");
+		}
 	}
 
 	void deposito(Cliente cliente, BigDecimal valor) {

@@ -2,17 +2,31 @@ package com.bancoeconomico.model;
 
 import com.bancoeconomico.model.enums.StatusClienteEnum;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Cliente {
+
+    @Id
+    private String id;
 
     private String nome;
     private LocalDate dataCadastro;
+    @Enumerated(EnumType.STRING)
     private StatusClienteEnum status;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Conta> contas;
+
+    public Cliente () {
+        /*
+            JPA empty constructor
+         */
+    }
 
     public Cliente(String nome) {
         this.nome = nome;
@@ -22,7 +36,9 @@ public abstract class Cliente {
         this.contas.add(new ContaCorrente(this));
     }
 
-    public abstract String getId();
+    public String getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -48,4 +64,7 @@ public abstract class Cliente {
         return contas;
     }
 
+    public void setContas(List<Conta> contas) {
+        this.contas = contas;
+    }
 }
