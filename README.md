@@ -13,5 +13,5 @@ Modulo III
 
 Modulo IV
 
-- Criar API restful para utilização do programa
-
+- Criar uma API Rest que simule uma aplicação de funções bancárias básicas
+- Operador com acesso a funcionalidades básicas disponibilizadas por estas instituições.
