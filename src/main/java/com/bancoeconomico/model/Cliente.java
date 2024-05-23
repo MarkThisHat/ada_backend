@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Cliente {
 
