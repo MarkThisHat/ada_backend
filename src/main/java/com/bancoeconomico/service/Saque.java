@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public interface Saque<T extends Cliente> {
 
-    void sacar(T cliente, Integer numeroConta, BigDecimal valor);
+    void sacar(T cliente, Long numeroConta, BigDecimal valor);
 
     default void verificarSaldo(Conta conta, BigDecimal valor) {
         if (valor.compareTo(conta.getSaldo()) > 0) {

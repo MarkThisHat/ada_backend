@@ -23,4 +23,8 @@ public class ContaCorrente extends Conta {
     public void setOverdraftLimit(BigDecimal overdraftLimit) {
         this.overdraftLimit = overdraftLimit;
     }
+
+    public BigDecimal getOverdraftLimit() {
+        return this.overdraftLimit;
+    }
 }

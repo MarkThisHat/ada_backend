@@ -12,7 +12,7 @@ import java.math.RoundingMode;
 public interface OperacoesBancarias<T extends Cliente> extends
         Deposito<T>, Saldo<T>, Saque<T>, Transferencia<T>, Investimento<T> {
 
-    default Conta getContaCliente(T cliente, Integer numeroConta) {
+    default Conta getContaCliente(T cliente, Long numeroConta) {
         for (Conta conta : cliente.getContas()) {
             if (conta.getNumero().equals(numeroConta)) {
                 return conta;
@@ -31,19 +31,19 @@ public interface OperacoesBancarias<T extends Cliente> extends
     }
 
     @Override
-    default BigDecimal consultarSaldo(T cliente, Integer numeroConta) {
+    default BigDecimal consultarSaldo(T cliente, Long numeroConta) {
         Conta conta = getContaCliente(cliente, numeroConta);
         return conta.getSaldo().setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override
-    default void transferir(T cliente, Integer numeroContaOrigem, Conta destino, BigDecimal valor) {
+    default void transferir(T cliente, Long numeroContaOrigem, Conta destino, BigDecimal valor) {
         this.sacar(cliente, numeroContaOrigem, valor);
         OperacoesBancariasFactory.getInstance().get(destino.getCliente())
                 .depositar(destino.getCliente(), destino.getNumero(), valor);
     }
 
-    default void depositar(T cliente, Integer numeroConta, BigDecimal valor) {
+    default void depositar(T cliente, Long numeroConta, BigDecimal valor) {
         Conta conta = this.getContaCliente(cliente, numeroConta);
         conta.setSaldo(conta.getSaldo().add(valor));
     }

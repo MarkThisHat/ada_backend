@@ -7,8 +7,12 @@ import java.time.LocalDate;
 
 public interface ContaDto {
     Long getId();
-    Integer getNumero();
+    Long getNumero();
     BigDecimal getSaldo();
     LocalDate getDataCriacao();
     Cliente getCliente();
+    void setNumero(Long numero);
+    void setSaldo(BigDecimal saldo);
+    void setDataCriacao(LocalDate dataCriacao);
+    void setCliente(Cliente cliente);
 }

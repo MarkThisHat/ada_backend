@@ -13,7 +13,7 @@ public class OperacoesContaClientePF implements OperacoesBancarias<ClientePf> {
     private static final BigDecimal RENDIMENTO_INVESTIMENTO = BigDecimal.valueOf(1.01);
 
     @Override
-    public void sacar(ClientePf cliente, Integer numeroConta, BigDecimal valor) {
+    public void sacar(ClientePf cliente, Long numeroConta, BigDecimal valor) {
         Conta conta = OperacoesBancarias.super.getContaCliente(cliente, numeroConta);
         OperacoesBancarias.super.verificarSaldo(conta, valor);
         conta.setSaldo(conta.getSaldo().subtract(valor));

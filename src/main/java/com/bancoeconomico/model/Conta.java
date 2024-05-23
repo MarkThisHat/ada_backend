@@ -6,14 +6,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public abstract class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer numero;
+    private Long numero;
     private BigDecimal saldo;
     private LocalDate dataCriacao;
 
@@ -38,7 +39,7 @@ public abstract class Conta {
         return cliente;
     }
 
-    public Integer getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
@@ -52,5 +53,21 @@ public abstract class Conta {
 
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNumero(Long numero) {
+        this.numero = numero;
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

@@ -24,7 +24,7 @@ public class OperacoesContaClientePJ implements OperacoesBancarias<ClientePj> {
     }
 
     @Override
-    public void sacar(ClientePj cliente, Integer numeroConta, BigDecimal valor) {
+    public void sacar(ClientePj cliente, Long numeroConta, BigDecimal valor) {
         Conta conta = OperacoesBancarias.super.getContaCliente(cliente, numeroConta);
         valor = valor.multiply(TAXA_RETIRADA);
         OperacoesBancarias.super.verificarSaldo(conta, valor);

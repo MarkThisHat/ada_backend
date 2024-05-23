@@ -21,6 +21,8 @@ public class ClientePfDto implements ClienteDto {
                         StatusClienteEnum status,
                         List<Conta> contas) {}
 
+    public ClientePfDto() {}
+
     @Override
     public String getId() {
         return cpf;

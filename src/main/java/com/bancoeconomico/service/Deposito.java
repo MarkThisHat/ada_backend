@@ -6,6 +6,6 @@ import java.math.BigDecimal;
 
 public interface Deposito<T extends Cliente> {
 
-    void depositar(T cliente, Integer numeroConta, BigDecimal valor);
+    void depositar(T cliente, Long numeroConta, BigDecimal valor);
 
 }

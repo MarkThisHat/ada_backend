@@ -21,6 +21,8 @@ public class ClientePjDto implements ClienteDto {
                         StatusClienteEnum status,
                         List<Conta> contas) {}
 
+    public ClientePjDto() {}
+
     @Override
     public String getId() {
         return cnpj;

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class ContaPoupancaDto implements ContaDto {
     private Long id;
-    private Integer numero;
+    private Long numero;
     private BigDecimal saldo;
     private LocalDate dataCriacao;
     private Cliente cliente;
@@ -19,7 +19,7 @@ public class ContaPoupancaDto implements ContaDto {
     }
 
     @Override
-    public Integer getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
@@ -36,6 +36,26 @@ public class ContaPoupancaDto implements ContaDto {
     @Override
     public Cliente getCliente() {
         return cliente;
+    }
+
+    @Override
+    public void setNumero(Long numero) {
+        this.numero = numero;
+    }
+
+    @Override
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    @Override
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    @Override
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public BigDecimal getInterestRate() {

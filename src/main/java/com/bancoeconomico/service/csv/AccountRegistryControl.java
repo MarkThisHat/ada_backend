@@ -6,13 +6,13 @@ import java.util.Random;
 import java.util.Set;
 
 public class AccountRegistryControl {
-    private static final Set<Integer> usedNumbers = Collections.synchronizedSet(new HashSet<>());
+    private static final Set<Long> usedNumbers = Collections.synchronizedSet(new HashSet<>());
 
-    public static int generateUniqueNumber() {
+    public static long generateUniqueNumber() {
         Random random = new Random();
-        int number;
+        long number;
         do {
-            number = random.nextInt(Integer.MAX_VALUE);
+            number = random.nextLong();
         } while (usedNumbers.contains(number));
         usedNumbers.add(number);
         return number;
