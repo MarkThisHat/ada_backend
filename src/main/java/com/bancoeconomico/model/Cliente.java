@@ -2,6 +2,8 @@ package com.bancoeconomico.model;
 
 import com.bancoeconomico.model.enums.StatusClienteEnum;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,6 +11,15 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ClientePf.class, name = "pf"),
+        @JsonSubTypes.Type(value = ClientePj.class, name = "pj")
+})
 public abstract class Cliente {
 
     @Id

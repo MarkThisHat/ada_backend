@@ -2,14 +2,19 @@ package com.bancoeconomico.dto;
 
 import com.bancoeconomico.model.Conta;
 import com.bancoeconomico.model.enums.StatusClienteEnum;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@JsonTypeName("pf")
+@Schema(description = "Cliente Pessoa Física")
 public class ClientePfDto implements ClienteDto {
     @Id
-    private String cpf; // Using cpf as ID
+    @Schema(description = "CPF do cliente", example = "12345678901")
+    private String cpf;
     private String nome;
     private LocalDate dataCadastro;
     private StatusClienteEnum status;

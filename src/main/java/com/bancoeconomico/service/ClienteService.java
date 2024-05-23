@@ -5,7 +5,6 @@ import com.bancoeconomico.model.*;
 import com.bancoeconomico.model.enums.StatusClienteEnum;
 import com.bancoeconomico.repository.ClienteRepository;
 import com.bancoeconomico.repository.ContaRepository;
-import com.bancoeconomico.service.factory.ContaFactory;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +31,11 @@ public class ClienteService {
         clientePf.setDataCadastro(LocalDate.now());
         clientePf.setStatus(StatusClienteEnum.ATIVO);
 
-        Conta contaCorrente = ContaFactory.createConta(clientePf, "corrente");
-        clientePf.setContas(Collections.singletonList((ContaCorrente) contaCorrente));
+        ContaCorrente contaCorrente = new ContaCorrente(clientePf);
+        clientePf.setContas(Collections.singletonList(contaCorrente));
 
         clienteRepository.save(clientePf);
-        contaRepository.save((ContaCorrente) contaCorrente);
+        contaRepository.save(contaCorrente);
 
         return clientePfDto;
     }
@@ -49,11 +48,11 @@ public class ClienteService {
         clientePj.setDataCadastro(LocalDate.now());
         clientePj.setStatus(StatusClienteEnum.ATIVO);
 
-        Conta contaCorrente = ContaFactory.createConta(clientePj, "corrente");
-        clientePj.setContas(Collections.singletonList((ContaCorrente) contaCorrente));
+        ContaCorrente contaCorrente = new ContaCorrente(clientePj);
+        clientePj.setContas(Collections.singletonList(contaCorrente));
 
         clienteRepository.save(clientePj);
-        contaRepository.save((ContaCorrente) contaCorrente);
+        contaRepository.save(contaCorrente);
 
         return clientePjDto;
     }
@@ -66,7 +65,6 @@ public class ClienteService {
         }
         throw new EntityNotFoundException("Cliente not found with id: " + id);
     }
-
 
     private ClienteDto mapToDto(Cliente cliente) {
         if (cliente instanceof ClientePf) {
@@ -127,12 +125,12 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(clienteId)
                 .orElseThrow(() -> new EntityNotFoundException("Cliente " + clienteId + " não localizado."));
 
-        Conta conta = contaRepository.findByClienteAndType(cliente, accountType)
-                .orElseThrow(() -> new IllegalArgumentException("Tipo de conta não localizado"));
+        Conta conta = contaRepository.findByCliente(cliente)
+                .orElseThrow(() -> new IllegalArgumentException("Conta não localizada para o cliente"));
 
-        if (conta instanceof ContaInvestimento) {
+        if ("investimento".equals(accountType) && conta instanceof ContaInvestimento) {
             ((ContaInvestimento) conta).applyInvestment(amount);
-        } else if (conta instanceof ContaPoupanca) {
+        } else if ("poupanca".equals(accountType) && conta instanceof ContaPoupanca) {
             ((ContaPoupanca) conta).applyInvestment(amount);
         } else {
             throw new IllegalArgumentException("Rendimento só ocorre em contas poupança ou investimento");

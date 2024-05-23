@@ -2,11 +2,13 @@ package com.bancoeconomico.dto;
 
 import com.bancoeconomico.model.Conta;
 import com.bancoeconomico.model.enums.StatusClienteEnum;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@JsonTypeName("pj")
 public class ClientePjDto implements ClienteDto {
     @Id
     private String cnpj; // Using cnpj as ID
