@@ -1,8 +1,8 @@
 package com.bancoeconomico.service.csv;
 
 import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ClientePF;
-import com.bancoeconomico.model.ClientePJ;
+import com.bancoeconomico.model.ClientePf;
+import com.bancoeconomico.model.ClientePj;
 import com.bancoeconomico.model.enums.TipoClienteEnum;
 
 import java.io.BufferedReader;
@@ -49,8 +49,8 @@ public class CsvDataImporter {
         TipoClienteEnum tipo = TipoClienteEnum.fromInt(Integer.parseInt(data[headerMap.get("tipo")]));
 
         return switch (tipo) {
-            case PESSOA_JURIDICA -> Optional.of(new ClientePJ(nome, documento));
-            case PESSOA_FISICA -> Optional.of(new ClientePF(nome, documento));
+            case PESSOA_JURIDICA -> Optional.of(new ClientePj(nome, documento));
+            case PESSOA_FISICA -> Optional.of(new ClientePf(nome, documento));
             default -> Optional.empty();
         };
     }

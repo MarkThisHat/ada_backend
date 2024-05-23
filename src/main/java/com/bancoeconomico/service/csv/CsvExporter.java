@@ -1,7 +1,7 @@
 package com.bancoeconomico.service.csv;
 
 import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ClientePF;
+import com.bancoeconomico.model.ClientePf;
 import com.bancoeconomico.model.Conta;
 
 import java.io.BufferedWriter;
@@ -23,7 +23,7 @@ public class CsvExporter {
                     String line = String.format("%s,%s,%s,%d,%s\n",
                             client.getNome(),
                             client.getId(),
-                            client instanceof ClientePF ? "PF" : "PJ",
+                            client instanceof ClientePf ? "PF" : "PJ",
                             conta.getNumero(),
                             conta.getSaldo().toString());
                     writer.write(line);

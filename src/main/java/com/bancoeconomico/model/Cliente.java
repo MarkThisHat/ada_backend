@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Cliente {
 
@@ -65,5 +66,13 @@ public abstract class Cliente {
 
     public void setContas(List<Conta> contas) {
         this.contas = contas;
+    }
+
+    public void setDataCadastro(LocalDate localDate) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public void setDataCadastro() {
+        this.dataCadastro = LocalDate.now();
     }
 }

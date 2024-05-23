@@ -1,36 +1,40 @@
 package com.bancoeconomico.controller;
 
-import com.bancoeconomico.model.Cliente;
+import com.bancoeconomico.dto.ClienteDto;
+import com.bancoeconomico.dto.ClientePfDto;
+import com.bancoeconomico.dto.ClientePjDto;
 import com.bancoeconomico.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/api/clientes")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping
-    public List<Cliente> getAllClientes() {
-        return clienteService.findAll();
-    }
-
-    @PostMapping
-    public Cliente createCliente(@RequestBody Cliente cliente) {
-        return clienteService.save(cliente);
-    }
-
     @GetMapping("/{id}")
-    public Cliente getClienteById(@PathVariable String id) {
-        return clienteService.findById(id);
+    public ResponseEntity<ClienteDto> getCliente(@PathVariable String id) {
+        ClienteDto clienteDto = clienteService.getClienteById(id);
+        if (clienteDto != null) {
+            return ResponseEntity.ok(clienteDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCliente(@PathVariable String id) {
-        clienteService.delete(id);
+    @PostMapping("/pf")
+    public ResponseEntity<ClientePfDto> createClientePF(@RequestBody ClientePfDto clientePfDto) {
+        ClientePfDto createdClientePFDto = clienteService.createClientePF(clientePfDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdClientePFDto);
+    }
+
+    @PostMapping("/pj")
+    public ResponseEntity<ClientePjDto> createClientePJ(@RequestBody ClientePjDto clientePjDto) {
+        ClientePjDto createdClientePJDto = clienteService.createClientePJ(clientePjDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdClientePJDto);
     }
 }

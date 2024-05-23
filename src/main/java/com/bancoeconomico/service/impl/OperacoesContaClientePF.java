@@ -1,26 +1,26 @@
 package com.bancoeconomico.service.impl;
 
 
-import com.bancoeconomico.model.ClientePF;
+import com.bancoeconomico.model.ClientePf;
 import com.bancoeconomico.model.Conta;
 import com.bancoeconomico.model.ContaInvestimento;
 import com.bancoeconomico.service.OperacoesBancarias;
 
 import java.math.BigDecimal;
 
-public class OperacoesContaClientePF implements OperacoesBancarias<ClientePF> {
+public class OperacoesContaClientePF implements OperacoesBancarias<ClientePf> {
 
     private static final BigDecimal RENDIMENTO_INVESTIMENTO = BigDecimal.valueOf(1.01);
 
     @Override
-    public void sacar(ClientePF cliente, Integer numeroConta, BigDecimal valor) {
+    public void sacar(ClientePf cliente, Integer numeroConta, BigDecimal valor) {
         Conta conta = OperacoesBancarias.super.getContaCliente(cliente, numeroConta);
         OperacoesBancarias.super.verificarSaldo(conta, valor);
         conta.setSaldo(conta.getSaldo().subtract(valor));
     }
 
     @Override
-    public void investir(ClientePF cliente, BigDecimal valor) {
+    public void investir(ClientePf cliente, BigDecimal valor) {
         Conta conta = OperacoesBancarias.super.getContaInvestimentoCliente(cliente);
         if (conta == null) {
             conta = new ContaInvestimento(cliente);

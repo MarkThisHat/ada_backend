@@ -2,16 +2,16 @@ package com.bancoeconomico.service.factory;
 
 import com.bancoeconomico.exceptions.TipoClienteInvalidoException;
 import com.bancoeconomico.model.Cliente;
-import com.bancoeconomico.model.ClientePF;
-import com.bancoeconomico.model.ClientePJ;
+import com.bancoeconomico.model.ClientePf;
+import com.bancoeconomico.model.ClientePj;
 import com.bancoeconomico.service.OperacoesBancarias;
 import com.bancoeconomico.service.impl.OperacoesContaClientePF;
 import com.bancoeconomico.service.impl.OperacoesContaClientePJ;
 
 public final class OperacoesBancariasFactory {
 
-    private final OperacoesBancarias<ClientePF> opeBancPF;
-    private final OperacoesBancarias<ClientePJ> opeBancPJ;
+    private final OperacoesBancarias<ClientePf> opeBancPF;
+    private final OperacoesBancarias<ClientePj> opeBancPJ;
 
     private static OperacoesBancariasFactory instance;
 
@@ -28,9 +28,9 @@ public final class OperacoesBancariasFactory {
     }
 
     public OperacoesBancarias get(Cliente cliente) {
-        if (cliente instanceof ClientePF) {
+        if (cliente instanceof ClientePf) {
             return this.opeBancPF;
-        } else if (cliente instanceof ClientePJ) {
+        } else if (cliente instanceof ClientePj) {
             return this.opeBancPJ;
         } else {
             throw new TipoClienteInvalidoException();

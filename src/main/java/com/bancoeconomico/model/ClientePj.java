@@ -3,17 +3,17 @@ package com.bancoeconomico.model;
 import jakarta.persistence.Entity;
 
 @Entity
-public class ClientePJ extends Cliente {
+public class ClientePj extends Cliente {
 
     private String cnpj;
 
-    public ClientePJ () {
+    public ClientePj() {
         /*
             JPA empty constructor
          */
     }
 
-    public ClientePJ(String nome, String cnpj) {
+    public ClientePj(String nome, String cnpj) {
         super(nome);
         this.cnpj = cnpj;
     }
@@ -25,5 +25,13 @@ public class ClientePJ extends Cliente {
     @Override
     public String getId() {
         return getCnpj();
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public void setId(String cnpj) {
+        this.cnpj = cnpj;
     }
 }
