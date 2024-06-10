@@ -70,7 +70,7 @@ class ClienteControllerITTest {
 
     @AfterEach
     void tearDown() {
-        repository.deleteAll(repository.findAll());
+        repository.deleteAllInBatch();
     }
 
     @Test
