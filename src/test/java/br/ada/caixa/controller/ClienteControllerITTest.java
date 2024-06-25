@@ -7,6 +7,7 @@ import br.ada.caixa.entity.Cliente;
 import br.ada.caixa.entity.TipoCliente;
 import br.ada.caixa.enums.StatusCliente;
 import br.ada.caixa.respository.ClienteRepository;
+import br.ada.caixa.respository.ContaRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,9 @@ class ClienteControllerITTest {
 
     @Autowired
     private ClienteRepository repository;
+
+    @Autowired
+    private ContaRepository contaRepository;
 
     private String url;
 
@@ -70,6 +74,7 @@ class ClienteControllerITTest {
 
     @AfterEach
     void tearDown() {
+        contaRepository.deleteAllInBatch();
         repository.deleteAllInBatch();
     }
 
