@@ -13,6 +13,7 @@ import br.ada.caixa.dto.response.RegistrarClienteResponseDto;
 import br.ada.caixa.entity.Cliente;
 import br.ada.caixa.entity.TipoCliente;
 import br.ada.caixa.respository.ClienteRepository;
+import br.ada.caixa.respository.ContaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -27,6 +28,9 @@ public class ClienteServiceTest {
 
     @Mock
     private ClienteRepository clienteRepository;
+
+    @Mock
+    private ContaRepository contaRepository; // Add this mock
 
     @Mock
     private ModelMapper modelMapper;

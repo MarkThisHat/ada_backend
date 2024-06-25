@@ -81,5 +81,4 @@ public class OperacoesBancariasController {
         saldoResponseDto.setSaldo(contaPoupanca.getSaldo());
         return ResponseEntity.status(HttpStatus.OK).body(saldoResponseDto);
     }
-
 }

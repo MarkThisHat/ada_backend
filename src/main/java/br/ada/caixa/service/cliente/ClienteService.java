@@ -11,12 +11,15 @@ import br.ada.caixa.entity.TipoCliente;
 import br.ada.caixa.entity.TipoConta;
 import br.ada.caixa.enums.StatusCliente;
 import br.ada.caixa.respository.ClienteRepository;
+import br.ada.caixa.respository.ContaRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +27,10 @@ import java.util.stream.Collectors;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final ContaRepository contaRepository;
     private final ModelMapper modelMapper;
+
+    private static final AtomicLong LAST_ACCOUNT_NUMBER = new AtomicLong(1000000000L);
 
     public RegistrarClienteResponseDto registrarPF(RegistrarClientePFRequestDto clienteDto) {
         final var cliente = modelMapper.map(clienteDto, Cliente.class);
@@ -43,6 +49,7 @@ public class ClienteService {
     public RegistrarClienteResponseDto registrar(Cliente cliente) {
         cliente = clienteRepository.save(cliente);
         final var conta = criarConta(cliente);
+        contaRepository.save(conta); // Persist the account
 
         final SaldoResponseDto saldoResponseDto = SaldoResponseDto.builder()
                 .saldo(conta.getSaldo())
@@ -55,12 +62,18 @@ public class ClienteService {
                 .build();
     }
 
-    private static Conta criarConta(final Cliente cliente) {
+    private Conta criarConta(final Cliente cliente) {
         final var contaCorrente = new Conta();
+        contaCorrente.setId(UUID.randomUUID()); // Set UUID for the account
         contaCorrente.setCliente(cliente);
         contaCorrente.setSaldo(BigDecimal.ZERO);
         contaCorrente.setTipo(TipoConta.CONTA_CORRENTE);
+        contaCorrente.setNumero(generateSequentialAccountNumber());
         return contaCorrente;
+    }
+
+    private Long generateSequentialAccountNumber() {
+        return LAST_ACCOUNT_NUMBER.incrementAndGet();
     }
 
     public List<ClienteResponseDto> listarTodos(TipoCliente tipoCliente) {
